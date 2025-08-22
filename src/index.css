@@ -1,0 +1,16 @@
+/* src/index.css */
+
+/* Global reset to remove default browser margins and prevent unwanted horizontal overflow */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* This is key to prevent horizontal scrolling and unwanted right-side space */
+  width: 100%; /* Ensure the body takes up the full width available */
+}
+
+/*
+  Bootstrap's .container class has default horizontal padding.
+  If the "space" you're referring to is this internal padding, it's normal for Bootstrap.
+  If it's external space causing a scrollbar, the above 'overflow-x: hidden' should fix it.
+  You generally don't want to remove all padding from .container unless you're explicitly handling gutters.
+*/
