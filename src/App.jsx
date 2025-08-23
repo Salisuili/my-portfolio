@@ -167,8 +167,6 @@ const Home = () => (
     </div>
 );
 
-// All other components (About, Projects, Skills, Contact, etc.) remain the same as your original code.
-// I've included them here for clarity, but they should be identical to what you already have.
 
 const About = () => (
     <section id="about" className="min-vh-100 bg-white py-5 px-3">
