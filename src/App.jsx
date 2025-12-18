@@ -15,7 +15,9 @@ import {
   Shield, 
   ExternalLink, 
   Download,
-  Users
+  Users,
+  Menu,
+  X
 } from 'lucide-react';
 
 // Image from public folder
@@ -24,38 +26,80 @@ const myImage = '/abba.jpg';
 const resume = '/Salisu_Iliyasu_2Resume.pdf';
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavLinkClick = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMenuOpen(false);
   };
 
   return (
     <nav style={styles.navbar}>
-      <div style={styles.container}>
-        <a href="#hero" style={styles.brand} onClick={(e) => { e.preventDefault(); handleNavLinkClick('hero'); }}>
-          Salisu Iliyasu
-        </a>
-        <div style={styles.navLinks}>
-          <a href="#hero" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('hero'); }}>
+      <div style={styles.navContainer}>
+        <div style={styles.navContent}>
+          <a href="#hero" style={styles.brand} onClick={(e) => { e.preventDefault(); handleNavLinkClick('hero'); }}>
+            Salisu Iliyasu
+          </a>
+          
+          {/* Desktop Menu */}
+          <div style={styles.desktopMenu}>
+            <a href="#hero" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('hero'); }}>
+              <HomeIcon size={18} style={styles.icon} />
+              <span>Home</span>
+            </a>
+            <a href="#about" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('about'); }}>
+              <User size={18} style={styles.icon} />
+              <span>About</span>
+            </a>
+            <a href="#projects" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('projects'); }}>
+              <FolderKanban size={18} style={styles.icon} />
+              <span>Projects</span>
+            </a>
+            <a href="#skills" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('skills'); }}>
+              <FlaskConical size={18} style={styles.icon} />
+              <span>Skills</span>
+            </a>
+            <a href="#contact" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('contact'); }}>
+              <Mail size={18} style={styles.icon} />
+              <span>Contact</span>
+            </a>
+          </div>
+          
+          {/* Mobile Menu Button */}
+          <button 
+            style={styles.menuButton}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+        
+        {/* Mobile Menu */}
+        <div style={{
+          ...styles.mobileMenu,
+          ...(isMenuOpen ? styles.mobileMenuOpen : styles.mobileMenuClosed)
+        }}>
+          <a href="#hero" style={styles.mobileNavLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('hero'); }}>
             <HomeIcon size={18} style={styles.icon} />
             <span>Home</span>
           </a>
-          <a href="#about" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('about'); }}>
+          <a href="#about" style={styles.mobileNavLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('about'); }}>
             <User size={18} style={styles.icon} />
             <span>About</span>
           </a>
-          <a href="#projects" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('projects'); }}>
+          <a href="#projects" style={styles.mobileNavLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('projects'); }}>
             <FolderKanban size={18} style={styles.icon} />
             <span>Projects</span>
           </a>
-          <a href="#skills" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('skills'); }}>
+          <a href="#skills" style={styles.mobileNavLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('skills'); }}>
             <FlaskConical size={18} style={styles.icon} />
             <span>Skills</span>
           </a>
-          <a href="#contact" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('contact'); }}>
+          <a href="#contact" style={styles.mobileNavLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('contact'); }}>
             <Mail size={18} style={styles.icon} />
             <span>Contact</span>
           </a>
@@ -64,7 +108,6 @@ const Navbar = () => {
     </nav>
   );
 };
-
 const Hero = () => (
   <section id="hero" style={styles.hero}>
     <div style={styles.container}>
@@ -555,7 +598,7 @@ const styles = {
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   },
   main: {
-    paddingTop: '70px',
+    paddingTop: '80px', // Increased to account for fixed navbar
   },
   navbar: {
     position: 'fixed',
@@ -563,29 +606,69 @@ const styles = {
     left: 0,
     right: 0,
     backgroundColor: '#1a202c',
-    padding: '1rem 0',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
     zIndex: 1000,
+    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
   },
-  container: {
+  navContainer: {
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: '0 2rem',
+    padding: '0 1rem',
+    '@media (min-width: 768px)': {
+      padding: '0 2rem',
+    },
+  },
+  navContent: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '1rem 0',
   },
   brand: {
-    fontSize: '1.5rem',
+    fontSize: '1.25rem',
     fontWeight: 'bold',
     color: '#fff',
     textDecoration: 'none',
     display: 'inline-block',
-    marginBottom: '0',
+    '@media (min-width: 768px)': {
+      fontSize: '1.5rem',
+    },
   },
-  navLinks: {
-    display: 'flex',
-    gap: '2rem',
-    justifyContent: 'flex-end',
-    marginTop: '1rem',
-    flexWrap: 'wrap',
+  desktopMenu: {
+    display: 'none',
+    '@media (min-width: 768px)': {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '2rem',
+    },
+  },
+  mobileMenu: {
+    display: 'block',
+    backgroundColor: '#1a202c',
+    overflow: 'hidden',
+    transition: 'max-height 0.3s ease-in-out',
+    '@media (min-width: 768px)': {
+      display: 'none',
+    },
+  },
+  mobileMenuOpen: {
+    maxHeight: '500px',
+    padding: '1rem 0',
+    borderTop: '1px solid #2d3748',
+  },
+  mobileMenuClosed: {
+    maxHeight: '0',
+    padding: '0',
+  },
+  menuButton: {
+    display: 'block',
+    backgroundColor: 'transparent',
+    border: 'none',
+    color: '#fff',
+    cursor: 'pointer',
+    padding: '0.5rem',
+    '@media (min-width: 768px)': {
+      display: 'none',
+    },
   },
   navLink: {
     display: 'flex',
@@ -596,56 +679,114 @@ const styles = {
     fontWeight: '500',
     transition: 'color 0.3s',
     cursor: 'pointer',
+    padding: '0.5rem 0',
+    '&:hover': {
+      color: '#fbbf24',
+    },
+  },
+  mobileNavLink: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem',
+    color: '#fff',
+    textDecoration: 'none',
+    fontWeight: '500',
+    padding: '1rem 0',
+    borderBottom: '1px solid #2d3748',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#fbbf24',
+      backgroundColor: 'rgba(255,255,255,0.05)',
+    },
+    '&:last-child': {
+      borderBottom: 'none',
+    },
   },
   icon: {
-    marginRight: '0.25rem',
+    flexShrink: 0,
   },
   hero: {
-    minHeight: '100vh',
+    minHeight: 'calc(100vh - 80px)', // Account for navbar height
     display: 'flex',
     alignItems: 'center',
     background: 'linear-gradient(135deg, #2d3748 0%, #4a5568 100%)',
-    padding: '4rem 0',
+    padding: '2rem 0',
+    '@media (min-width: 768px)': {
+      padding: '4rem 0',
+    },
+  },
+  container: {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '0 1rem',
+    '@media (min-width: 768px)': {
+      padding: '0 2rem',
+    },
   },
   heroContent: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: '4rem',
+    gridTemplateColumns: '1fr',
+    gap: '3rem',
     alignItems: 'center',
+    '@media (min-width: 1024px)': {
+      gridTemplateColumns: '1fr 1fr',
+      gap: '4rem',
+    },
   },
   heroText: {
     color: '#fff',
+    textAlign: 'center',
+    '@media (min-width: 1024px)': {
+      textAlign: 'left',
+    },
   },
   heroTitle: {
-    fontSize: '3rem',
+    fontSize: '2.5rem',
     fontWeight: 'bold',
     marginBottom: '1rem',
     color: '#fff',
+    '@media (min-width: 768px)': {
+      fontSize: '3rem',
+    },
   },
   highlight: {
     color: '#fbbf24',
   },
   heroSubtitle: {
-    fontSize: '1.5rem',
+    fontSize: '1.25rem',
     marginBottom: '1rem',
     color: '#e5e7eb',
+    '@media (min-width: 768px)': {
+      fontSize: '1.5rem',
+    },
   },
   heroDescription: {
-    fontSize: '1.125rem',
+    fontSize: '1rem',
     marginBottom: '2rem',
     lineHeight: '1.7',
     opacity: 0.9,
+    '@media (min-width: 768px)': {
+      fontSize: '1.125rem',
+    },
   },
   heroButtons: {
     display: 'flex',
+    flexDirection: 'column',
     gap: '1rem',
-    flexWrap: 'wrap',
+    alignItems: 'center',
+    '@media (min-width: 768px)': {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      '@media (min-width: 1024px)': {
+        justifyContent: 'flex-start',
+      },
+    },
   },
   btnPrimary: {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '0.5rem',
-    padding: '0.875rem 2rem',
+    padding: '0.875rem 1.5rem',
     backgroundColor: '#fbbf24',
     color: '#000',
     border: 'none',
@@ -655,12 +796,17 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s',
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    width: '100%',
+    justifyContent: 'center',
+    '@media (min-width: 768px)': {
+      width: 'auto',
+    },
   },
   btnSecondary: {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '0.5rem',
-    padding: '0.875rem 2rem',
+    padding: '0.875rem 1.5rem',
     backgroundColor: 'transparent',
     color: '#fff',
     border: '2px solid #fff',
@@ -670,12 +816,17 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s',
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    width: '100%',
+    justifyContent: 'center',
+    '@media (min-width: 768px)': {
+      width: 'auto',
+    },
   },
   btnDownload: {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '0.5rem',
-    padding: '0.875rem 2rem',
+    padding: '0.875rem 1.5rem',
     backgroundColor: '#fff',
     color: '#000',
     border: 'none',
@@ -686,6 +837,11 @@ const styles = {
     transition: 'all 0.3s',
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
     textDecoration: 'none',
+    width: '100%',
+    justifyContent: 'center',
+    '@media (min-width: 768px)': {
+      width: 'auto',
+    },
   },
   buttonIcon: {
     marginLeft: '0.5rem',
@@ -696,55 +852,94 @@ const styles = {
     justifyContent: 'center',
   },
   heroImage: {
-    width: '400px',
-    height: '400px',
+    width: '300px',
+    height: '300px',
     borderRadius: '50%',
     objectFit: 'cover',
     border: '5px solid #fff',
     boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
     transform: 'scale(0.95)',
+    '@media (min-width: 768px)': {
+      width: '350px',
+      height: '350px',
+    },
+    '@media (min-width: 1024px)': {
+      width: '400px',
+      height: '400px',
+    },
   },
   imageBorder: {
     position: 'absolute',
     top: 0,
     left: '50%',
     transform: 'translateX(-50%) scale(1.05)',
-    width: '400px',
-    height: '400px',
+    width: '300px',
+    height: '300px',
     borderRadius: '50%',
     border: '3px solid #fbbf24',
+    '@media (min-width: 768px)': {
+      width: '350px',
+      height: '350px',
+    },
+    '@media (min-width: 1024px)': {
+      width: '400px',
+      height: '400px',
+    },
   },
   section: {
-    padding: '5rem 0',
+    padding: '3rem 0',
     backgroundColor: '#fff',
+    '@media (min-width: 768px)': {
+      padding: '5rem 0',
+    },
   },
   sectionAlt: {
-    padding: '5rem 0',
+    padding: '3rem 0',
     backgroundColor: '#f9fafb',
+    '@media (min-width: 768px)': {
+      padding: '5rem 0',
+    },
   },
   sectionHeader: {
     textAlign: 'center',
-    marginBottom: '3rem',
+    marginBottom: '2rem',
+    '@media (min-width: 768px)': {
+      marginBottom: '3rem',
+    },
   },
   sectionTitle: {
-    fontSize: '2.5rem',
+    fontSize: '2rem',
     fontWeight: 'bold',
-    marginBottom: '1rem',
+    marginBottom: '0.5rem',
     color: '#1a202c',
+    '@media (min-width: 768px)': {
+      fontSize: '2.5rem',
+      marginBottom: '1rem',
+    },
   },
   sectionTitleWhite: {
-    fontSize: '2.5rem',
+    fontSize: '2rem',
     fontWeight: 'bold',
-    marginBottom: '1rem',
+    marginBottom: '0.5rem',
     color: '#fff',
+    '@media (min-width: 768px)': {
+      fontSize: '2.5rem',
+      marginBottom: '1rem',
+    },
   },
   sectionSubtitle: {
-    fontSize: '1.25rem',
+    fontSize: '1rem',
     color: '#6b7280',
+    '@media (min-width: 768px)': {
+      fontSize: '1.25rem',
+    },
   },
   sectionSubtitleWhite: {
-    fontSize: '1.25rem',
+    fontSize: '1rem',
     color: '#e5e7eb',
+    '@media (min-width: 768px)': {
+      fontSize: '1.25rem',
+    },
   },
   aboutContainer: {
     maxWidth: '1000px',
@@ -752,19 +947,26 @@ const styles = {
   },
   aboutHeader: {
     textAlign: 'center',
-    marginBottom: '3rem',
+    marginBottom: '2rem',
+    '@media (min-width: 768px)': {
+      marginBottom: '3rem',
+    },
   },
   profileImageWrapper: {
     position: 'relative',
     display: 'inline-block',
-    marginBottom: '2rem',
+    marginBottom: '1.5rem',
   },
   profileImage: {
-    width: '220px',
-    height: '220px',
+    width: '180px',
+    height: '180px',
     borderRadius: '50%',
     objectFit: 'cover',
     boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+    '@media (min-width: 768px)': {
+      width: '220px',
+      height: '220px',
+    },
   },
   profileBadge: {
     position: 'absolute',
@@ -797,22 +999,33 @@ const styles = {
   badgePurple: { backgroundColor: '#ede9fe', color: '#5b21b6' },
   aboutCards: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: '2rem',
+    gridTemplateColumns: '1fr',
+    gap: '1.5rem',
+    '@media (min-width: 768px)': {
+      gridTemplateColumns: '1fr 1fr',
+      gap: '2rem',
+    },
   },
   card: {
     backgroundColor: '#fff',
     borderRadius: '0.75rem',
-    padding: '2rem',
+    padding: '1.5rem',
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
     transition: 'transform 0.3s, box-shadow 0.3s',
+    '@media (min-width: 768px)': {
+      padding: '2rem',
+    },
   },
   cardTitle: {
     display: 'flex',
     alignItems: 'center',
-    fontSize: '1.5rem',
-    marginBottom: '1.5rem',
+    fontSize: '1.25rem',
+    marginBottom: '1rem',
     color: '#1a202c',
+    '@media (min-width: 768px)': {
+      fontSize: '1.5rem',
+      marginBottom: '1.5rem',
+    },
   },
   cardIcon: {
     marginRight: '0.75rem',
@@ -822,6 +1035,10 @@ const styles = {
     color: '#6b7280',
     marginBottom: '1rem',
     lineHeight: '1.7',
+    fontSize: '0.95rem',
+    '@media (min-width: 768px)': {
+      fontSize: '1rem',
+    },
   },
   feature: {
     display: 'flex',
@@ -833,15 +1050,16 @@ const styles = {
     padding: '0.75rem',
     borderRadius: '50%',
     marginRight: '1rem',
+    flexShrink: 0,
   },
   featureTitle: {
-    fontSize: '1rem',
+    fontSize: '0.95rem',
     fontWeight: '600',
     marginBottom: '0.25rem',
     color: '#1a202c',
   },
   featureText: {
-    fontSize: '0.875rem',
+    fontSize: '0.85rem',
     color: '#6b7280',
     margin: 0,
   },
@@ -858,6 +1076,7 @@ const styles = {
     color: '#6b7280',
     paddingLeft: '1.5rem',
     margin: 0,
+    fontSize: '0.95rem',
   },
   listItem: {
     marginBottom: '0.5rem',
@@ -876,17 +1095,24 @@ const styles = {
   },
   projectGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-    gap: '2rem',
+    gridTemplateColumns: '1fr',
+    gap: '1.5rem',
+    '@media (min-width: 640px)': {
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      gap: '2rem',
+    },
   },
   projectCard: {
     backgroundColor: '#fff',
     borderRadius: '0.75rem',
-    padding: '2rem',
+    padding: '1.5rem',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
     transition: 'transform 0.3s, box-shadow 0.3s',
     display: 'flex',
     flexDirection: 'column',
+    '@media (min-width: 768px)': {
+      padding: '2rem',
+    },
   },
   projectHeader: {
     display: 'flex',
@@ -895,10 +1121,13 @@ const styles = {
     marginBottom: '1rem',
   },
   projectTitle: {
-    fontSize: '1.25rem',
+    fontSize: '1.125rem',
     fontWeight: '600',
     color: '#1a202c',
     margin: 0,
+    '@media (min-width: 768px)': {
+      fontSize: '1.25rem',
+    },
   },
   statusBadge: {
     padding: '0.25rem 0.75rem',
@@ -914,6 +1143,7 @@ const styles = {
     marginBottom: '1.5rem',
     lineHeight: '1.6',
     flexGrow: 1,
+    fontSize: '0.95rem',
   },
   techStack: {
     marginBottom: '1.5rem',
@@ -958,6 +1188,10 @@ const styles = {
     display: 'flex',
     gap: '0.75rem',
     marginTop: 'auto',
+    flexDirection: 'column',
+    '@media (min-width: 640px)': {
+      flexDirection: 'row',
+    },
   },
   linkBtn: {
     display: 'inline-flex',
@@ -991,22 +1225,32 @@ const styles = {
   },
   skillsGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-    gap: '2rem',
+    gridTemplateColumns: '1fr',
+    gap: '1.5rem',
+    '@media (min-width: 768px)': {
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      gap: '2rem',
+    },
   },
   skillCard: {
     backgroundColor: '#fff',
     borderRadius: '0.75rem',
-    padding: '2rem',
+    padding: '1.5rem',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    '@media (min-width: 768px)': {
+      padding: '2rem',
+    },
   },
   skillTitle: {
     display: 'flex',
     alignItems: 'center',
-    fontSize: '1.25rem',
+    fontSize: '1.125rem',
     fontWeight: '600',
     marginBottom: '1.5rem',
     color: '#1a202c',
+    '@media (min-width: 768px)': {
+      fontSize: '1.25rem',
+    },
   },
   skillIcon: {
     marginRight: '0.75rem',
@@ -1028,6 +1272,7 @@ const styles = {
   skillName: {
     color: '#1a202c',
     fontWeight: '500',
+    fontSize: '0.95rem',
   },
   levelBadge: {
     padding: '0.25rem 0.75rem',
@@ -1048,8 +1293,12 @@ const styles = {
   },
   securityGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '1.5rem',
+    gridTemplateColumns: '1fr',
+    gap: '1rem',
+    '@media (min-width: 640px)': {
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: '1.5rem',
+    },
   },
   securityItem: {
     backgroundColor: '#f9fafb',
@@ -1080,25 +1329,38 @@ const styles = {
     fontWeight: '600',
   },
   contactSection: {
-    padding: '5rem 0',
+    padding: '3rem 0',
     backgroundColor: '#1a202c',
     color: '#fff',
+    '@media (min-width: 768px)': {
+      padding: '5rem 0',
+    },
   },
   contactFormWrapper: {
     maxWidth: '800px',
-    margin: '0 auto 3rem',
+    margin: '0 auto 2rem',
+    '@media (min-width: 768px)': {
+      marginBottom: '3rem',
+    },
   },
   contactCard: {
     backgroundColor: '#2d3748',
     borderRadius: '0.75rem',
-    padding: '3rem',
+    padding: '1.5rem',
     boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+    '@media (min-width: 768px)': {
+      padding: '3rem',
+    },
   },
   formRow: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: '1.5rem',
+    gridTemplateColumns: '1fr',
+    gap: '1rem',
     marginBottom: '1.5rem',
+    '@media (min-width: 768px)': {
+      gridTemplateColumns: '1fr 1fr',
+      gap: '1.5rem',
+    },
   },
   formGroup: {
     marginBottom: '1.5rem',
@@ -1143,19 +1405,32 @@ const styles = {
   },
   contactInfo: {
     textAlign: 'center',
-    marginTop: '3rem',
+    marginTop: '2rem',
+    '@media (min-width: 768px)': {
+      marginTop: '3rem',
+    },
   },
   contactLabel: {
-    fontSize: '1.25rem',
+    fontSize: '1.125rem',
     color: '#e5e7eb',
     marginBottom: '1.5rem',
+    '@media (min-width: 768px)': {
+      fontSize: '1.25rem',
+    },
   },
   contactButtons: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
     justifyContent: 'center',
-    gap: '1.5rem',
-    marginBottom: '3rem',
+    gap: '1rem',
+    marginBottom: '2rem',
+    '@media (min-width: 640px)': {
+      flexDirection: 'row',
+      gap: '1.5rem',
+    },
+    '@media (min-width: 768px)': {
+      marginBottom: '3rem',
+    },
   },
   contactBtn: {
     display: 'inline-flex',
@@ -1167,11 +1442,18 @@ const styles = {
     border: '2px solid #fff',
     borderRadius: '9999px',
     textDecoration: 'none',
-    fontSize: '1rem',
+    fontSize: '0.95rem',
     transition: 'all 0.3s',
+    justifyContent: 'center',
+    '@media (min-width: 768px)': {
+      fontSize: '1rem',
+    },
   },
   socialSection: {
-    marginBottom: '3rem',
+    marginBottom: '2rem',
+    '@media (min-width: 768px)': {
+      marginBottom: '3rem',
+    },
   },
   socialLabel: {
     color: '#e5e7eb',
@@ -1215,6 +1497,7 @@ const styles = {
   locationText: {
     color: '#9ca3af',
     margin: '0.5rem 0',
+    fontSize: '0.95rem',
   },
   footer: {
     backgroundColor: '#0f172a',
@@ -1223,14 +1506,20 @@ const styles = {
   },
   footerContent: {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexWrap: 'wrap',
     gap: '1rem',
+    textAlign: 'center',
+    '@media (min-width: 640px)': {
+      flexDirection: 'row',
+      textAlign: 'left',
+    },
   },
   footerText: {
     color: '#9ca3af',
     margin: 0,
+    fontSize: '0.95rem',
   },
   footerHighlight: {
     color: '#fbbf24',
