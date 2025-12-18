@@ -340,7 +340,7 @@ const skillsData = {
   ],
 };
 
-const SkillCategory = ({ title, skills }) => (
+const SkillCategory = ({ title, skills, icon: Icon }) => (
   <div style={styles.skillCard}>
     <h3 style={styles.skillTitle}>
       <Icon size={24} style={styles.skillIcon} /> {title}
