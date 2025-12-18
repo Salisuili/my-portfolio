@@ -1,19 +1,31 @@
-import React, { useRef, useState } from 'react';
-import myAvifImage from './assets/myimage.png';
-import resume from './assets/Salisu_Iliyasu_2Resume.pdf';
-import { Home as HomeIcon, User, FolderKanban, FlaskConical, Mail, Github, Linkedin, Smartphone, Mail as EmailIcon, Code, Database, Cloud, Zap, Shield, GitBranch, Terminal, ExternalLink, Linkedin as LinkedInIcon, Users as UsersIcon, Download } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  Home as HomeIcon, 
+  User, 
+  FolderKanban, 
+  FlaskConical, 
+  Mail, 
+  Github, 
+  Linkedin, 
+  Smartphone, 
+  Mail as EmailIcon, 
+  Code, 
+  Database, 
+  Cloud, 
+  Shield, 
+  ExternalLink, 
+  Download,
+  Users
+} from 'lucide-react';
+
+// Image from public folder
+const myImage = '/abba.jpg';
+// Resume from assets folder - in real app you'd import it
+const resume = '/Salisu_Iliyasu_2Resume.pdf';
 
 const Navbar = () => {
-  const navCollapseRef = useRef(null);
 
   const handleNavLinkClick = (sectionId) => {
-    // Close the mobile menu if it's open
-    if (navCollapseRef.current && navCollapseRef.current.classList.contains('show')) {
-      const bsCollapse = new window.bootstrap.Collapse(navCollapseRef.current, { toggle: false });
-      bsCollapse.hide();
-    }
-
-    // Scroll to section
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -21,45 +33,32 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
-      <div className="container-fluid">
-        <a href="#hero" className="navbar-brand h1 mb-0 fs-3" onClick={(e) => { e.preventDefault(); handleNavLinkClick('hero'); }}>Salisu Iliyasu</a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav" ref={navCollapseRef}>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a href="#hero" className="nav-link d-flex align-items-center gap-2" onClick={(e) => { e.preventDefault(); handleNavLinkClick('hero'); }}>
-                <HomeIcon size={18} />
-                <span>Home</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#about" className="nav-link d-flex align-items-center gap-2" onClick={(e) => { e.preventDefault(); handleNavLinkClick('about'); }}>
-                <User size={18} />
-                <span>About</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#projects" className="nav-link d-flex align-items-center gap-2" onClick={(e) => { e.preventDefault(); handleNavLinkClick('projects'); }}>
-                <FolderKanban size={18} />
-                <span>Projects</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#skills" className="nav-link d-flex align-items-center gap-2" onClick={(e) => { e.preventDefault(); handleNavLinkClick('skills'); }}>
-                <FlaskConical size={18} />
-                <span>Skills</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#contact" className="nav-link d-flex align-items-center gap-2" onClick={(e) => { e.preventDefault(); handleNavLinkClick('contact'); }}>
-                <Mail size={18} />
-                <span>Contact</span>
-              </a>
-            </li>
-          </ul>
+    <nav style={styles.navbar}>
+      <div style={styles.container}>
+        <a href="#hero" style={styles.brand} onClick={(e) => { e.preventDefault(); handleNavLinkClick('hero'); }}>
+          Salisu Iliyasu
+        </a>
+        <div style={styles.navLinks}>
+          <a href="#hero" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('hero'); }}>
+            <HomeIcon size={18} style={styles.icon} />
+            <span>Home</span>
+          </a>
+          <a href="#about" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('about'); }}>
+            <User size={18} style={styles.icon} />
+            <span>About</span>
+          </a>
+          <a href="#projects" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('projects'); }}>
+            <FolderKanban size={18} style={styles.icon} />
+            <span>Projects</span>
+          </a>
+          <a href="#skills" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('skills'); }}>
+            <FlaskConical size={18} style={styles.icon} />
+            <span>Skills</span>
+          </a>
+          <a href="#contact" style={styles.navLink} onClick={(e) => { e.preventDefault(); handleNavLinkClick('contact'); }}>
+            <Mail size={18} style={styles.icon} />
+            <span>Contact</span>
+          </a>
         </div>
       </div>
     </nav>
@@ -67,36 +66,40 @@ const Navbar = () => {
 };
 
 const Hero = () => (
-  <section id="hero" className="min-vh-100 d-flex align-items-center justify-content-center bg-light py-5 px-3">
-    <div className="container">
-      <div className="row align-items-center justify-content-center">
-        <div className="col-lg-6 text-center text-lg-start mb-4 mb-lg-0">
-          <h1 className="display-4 fw-bold text-dark mb-3">
-            Hello, I'm <span className="text-primary">Salisu Iliyasu</span>
+  <section id="hero" style={styles.hero}>
+    <div style={styles.container}>
+      <div style={styles.heroContent}>
+        <div style={styles.heroText}>
+          <h1 style={styles.heroTitle}>
+            Hi, I'm <span style={styles.highlight}>Salisu Iliyasu</span>
           </h1>
-          <p className="lead text-muted mb-5">
-            Full Stack Developer with expertise in modern web technologies, passionate about designing and building scalable, user-friendly, and secure web applications.
+          <h2 style={styles.heroSubtitle}>Full Stack Developer & Security Specialist</h2>
+          <p style={styles.heroDescription}>
+            Building scalable, secure, and user-centric web applications with modern technologies. 
+            Passionate about creating solutions that combine functionality with exceptional user experience.
           </p>
-          <div className="d-flex flex-wrap gap-3">
-            <a href="#projects" className="btn btn-primary btn-lg rounded-pill shadow-lg animate-hover" onClick={(e) => { e.preventDefault(); document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }); }}>
-              View Projects <FolderKanban className="ms-2" size={20} />
-            </a>
-            <a href="#contact" className="btn btn-outline-primary btn-lg rounded-pill shadow-lg animate-hover" onClick={(e) => { e.preventDefault(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }}>
-              Contact Me <Mail className="ms-2" size={20} />
-            </a>
-            <a href={resume} download="Salisu_Iliyasu_Resume.pdf" className="btn btn-success btn-lg rounded-pill shadow-lg animate-hover">
-              Download Resume <Download className="ms-2" size={20} />
+          <div style={styles.heroButtons}>
+            <button style={styles.btnPrimary} onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>
+              View Projects <FolderKanban size={20} style={styles.buttonIcon} />
+            </button>
+            <button style={styles.btnSecondary} onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
+              Contact Me <Mail size={20} style={styles.buttonIcon} />
+            </button>
+            <a href={resume} download="Salisu_Iliyasu_Resume.pdf" style={styles.btnDownload}>
+              Download Resume <Download size={20} style={styles.buttonIcon} />
             </a>
           </div>
         </div>
-        <div className="col-lg-6 d-flex justify-content-center">
+        <div style={styles.heroImageContainer}>
           <img
-            src={myAvifImage}
-            alt="Salisu Iliyasu Portrait"
-            className="img-fluid rounded-circle shadow-lg"
-            style={{ maxWidth: '500px', height: 'auto', objectFit: 'cover' }}
-            onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/500x500/cccccc/333333?text=Image+Loading+Error"; }}
+            src={myImage}
+            alt="Salisu Iliyasu"
+            style={styles.heroImage}
+            onError={(e) => { 
+              e.target.src = "https://placehold.co/400x400/2d3748/ffffff?text=Salisu+Iliyasu"; 
+            }}
           />
+          <div style={styles.imageBorder}></div>
         </div>
       </div>
     </div>
@@ -104,60 +107,83 @@ const Hero = () => (
 );
 
 const About = () => (
-  <section id="about" className="py-5 bg-white">
-    <div className="container my-5">
-      <div className="row justify-content-center">
-        <div className="col-lg-10">
-          <div className="text-center mb-5">
+  <section id="about" style={styles.section}>
+    <div style={styles.container}>
+      <div style={styles.aboutContainer}>
+        <div style={styles.aboutHeader}>
+          <div style={styles.profileImageWrapper}>
             <img
-              src={myAvifImage}
+              src={myImage}
               alt="Salisu Iliyasu"
-              className="img-fluid rounded-circle shadow-lg mb-4"
-              style={{ maxWidth: '250px' }}
+              style={styles.profileImage}
+              onError={(e) => { 
+                e.target.src = "https://placehold.co/220x220/2d3748/ffffff?text=SI"; 
+              }}
             />
-            <h2 className="display-5 fw-bold text-dark mb-3">Salisu Iliyasu</h2>
-            <p className="lead text-muted mb-4">Full Stack Developer & Security Enthusiast</p>
-            <div className="d-flex flex-wrap justify-content-center gap-2">
-              <span className="badge bg-primary rounded-pill p-2">React.js</span>
-              <span className="badge bg-primary rounded-pill p-2">Node.js</span>
-              <span className="badge bg-primary rounded-pill p-2">PHP</span>
-              <span className="badge bg-primary rounded-pill p-2">MySQL</span>
-              <span className="badge bg-primary rounded-pill p-2">MongoDB</span>
-              <span className="badge bg-primary rounded-pill p-2">Security</span>
+            <div style={styles.profileBadge}>
+              <User size={24} color="#000" />
             </div>
           </div>
-          <div className="card border-0 shadow-lg mb-5">
-            <div className="card-body p-5">
-              <h3 className="h3 text-primary mb-4">My Story</h3>
-              <p className="lead text-muted mb-4">
-                I'm a passionate full-stack developer with a journey that started from curiosity and evolved into a professional career
-                building modern, scalable web applications. My approach to development combines technical expertise with a focus on
-                creating intuitive user experiences.
-              </p>
-              <p className="text-muted mb-4">
-                What drives me is the ability to solve real-world problems through code. I believe in creating solutions that are not
-                only functional but also enjoyable to use. My development process emphasizes clean code, robust architecture, and
-                implementing security best practices from the ground up.
-              </p>
-              <p className="text-muted">
-                Over the past few years, I've had the opportunity to work on diverse projects while also sharing my knowledge as a
-                tutor. This experience has taught me the importance of clear communication, adaptability, and continuous learning in
-                the ever-evolving field of web development.
-              </p>
+          <h2 style={styles.sectionTitle}>About Me</h2>
+          <p style={styles.sectionSubtitle}>Full Stack Developer & Security Enthusiast</p>
+          <div style={styles.badges}>
+            <span style={{...styles.badge, ...styles.badgeBlue}}>React.js</span>
+            <span style={{...styles.badge, ...styles.badgeGreen}}>Next.js</span>
+            <span style={{...styles.badge, ...styles.badgeCyan}}>Node.js</span>
+            <span style={{...styles.badge, ...styles.badgeYellow}}>PHP</span>
+            <span style={{...styles.badge, ...styles.badgeRed}}>MySQL</span>
+            <span style={{...styles.badge, ...styles.badgeGray}}>MongoDB</span>
+            <span style={{...styles.badge, ...styles.badgePurple}}>Security</span>
+          </div>
+        </div>
+        
+        <div style={styles.aboutCards}>
+          <div style={styles.card}>
+            <h3 style={styles.cardTitle}>
+              <Code size={24} style={styles.cardIcon} /> My Journey
+            </h3>
+            <p style={styles.cardText}>
+              My development journey began with curiosity and has evolved into a passion for creating 
+              impactful web solutions. I specialize in building modern, scalable applications that 
+              prioritize both performance and user experience.
+            </p>
+            <p style={styles.cardText}>
+              I believe in writing clean, maintainable code and following best practices. My experience 
+              spans across various domains including e-commerce, real estate, education, and enterprise 
+              applications.
+            </p>
+            <div style={styles.feature}>
+              <div style={styles.featureIcon}>
+                <Users size={20} color="#3b82f6" />
+              </div>
+              <div>
+                <h4 style={styles.featureTitle}>Teaching Experience</h4>
+                <p style={styles.featureText}>Sharing knowledge as a tutor has honed my communication and mentorship skills</p>
+              </div>
             </div>
           </div>
-          <div className="card border-0 shadow-lg">
-            <div className="card-body p-5">
-              <h3 className="h3 text-primary mb-4">Beyond Code</h3>
-              <p className="text-muted mb-4">
-                When I'm not immersed in code, I enjoy exploring new technologies, contributing to open-source projects,
-                and engaging with the developer community. I'm passionate about knowledge sharing and believe that the best
-                way to learn is to teach others.
-              </p>
-              <p className="text-muted mb-0">
-                I maintain a curious mindset, always looking for opportunities to expand my skillset and stay updated with
-                the latest trends in web development and cybersecurity. This continuous learning approach helps me bring
-                fresh perspectives and innovative solutions to every project I work on.
+          
+          <div style={styles.card}>
+            <h3 style={styles.cardTitle}>
+              <Shield size={24} style={styles.cardIcon} /> My Approach
+            </h3>
+            <p style={styles.cardText}>
+              Security-first mindset in all development phases. I implement security best practices 
+              from design to deployment, ensuring robust and reliable applications.
+            </p>
+            <div style={styles.principles}>
+              <h4 style={styles.principlesTitle}>Core Principles</h4>
+              <ul style={styles.list}>
+                <li style={styles.listItem}>Clean, modular architecture</li>
+                <li style={styles.listItem}>Performance optimization</li>
+                <li style={styles.listItem}>Security by design</li>
+                <li style={styles.listItem}>User-centered development</li>
+                <li style={styles.listItem}>Continuous learning & improvement</li>
+              </ul>
+            </div>
+            <div style={styles.quote}>
+              <p style={styles.quoteText}>
+                "Building solutions that not only work but also scale and secure"
               </p>
             </div>
           </div>
@@ -170,117 +196,109 @@ const About = () => (
 const projectsData = [
   {
     title: "Restaurant Management System",
-    description: "A web platform for order processing, inventory control, and customer interaction, designed to streamline restaurant operations and enhance customer experience.",
-    stack: ["React.js", "MongoDB", "Express.js"],
-    features: ["Order Management", "Inventory Control", "Customer Interaction", "Reporting"],
+    description: "A comprehensive web platform for order processing, inventory control, and customer interaction management.",
+    stack: ["React.js", "MongoDB", "Express.js", "Node.js"],
+    features: ["Real-time Order Management", "Inventory Tracking", "Customer Analytics", "Reporting Dashboard"],
     github: "https://github.com/Salisuili/rest_frontend",
-    demo: "https://iyarest.vercel.app/"
+    demo: "https://iyarest.vercel.app/",
+    status: "Live"
   },
   {
     title: "LISFN Online Journal Platform",
-    description: "A secure online platform for content creation, management, and publishing of academic journals, facilitating peer review and dissemination.",
-    stack: ["Next.js", "Tailwind", "Supabase"],
-    features: ["Content Management", "User Roles", "Publishing Workflow", "Secure Access"],
+    description: "Secure academic journal platform for content creation, management, and publishing with peer review workflow.",
+    stack: ["Next.js", "Tailwind CSS", "Supabase", "TypeScript"],
+    features: ["Role-based Access", "Peer Review System", "Secure Publishing", "Real-time Updates"],
     github: "https://github.com/Salisuili/lisfnonlinejournals",
-    demo: "https://lisfnonlinejournals.vercel.app/"
+    demo: "https://lisfnonlinejournals.vercel.app/",
+    status: "Live"
   },
   {
     title: "Geo-enabled Job Platform",
-    description: "A location-based job platform with real-time updates using Socket.IO and cloud storage for assets, connecting job seekers with opportunities.",
+    description: "Location-based job search platform with real-time notifications and cloud storage integration.",
     stack: ["React.js", "Node.js", "Socket.IO", "AWS S3", "MongoDB"],
-    features: ["Real-time Job Updates", "Location-based Search", "Cloud Storage", "User Profiles"],
+    features: ["Real-time Updates", "Location-based Search", "Cloud Storage", "User Profiles", "Chat System"],
     github: "https://github.com/Salisuili/Geo-job-platform-frontend",
-    demo: "https://connectlocal-alpha.vercel.app/"
+    demo: "https://connectlocal-alpha.vercel.app/",
+    status: "Live"
   },
   {
-    title: "Real Estate Website (Down Stone Ultimate Estate Developer)",
-    description: "Developed a comprehensive online presence for a real estate developer, showcasing properties, services, and enabling client inquiries.",
-    stack: ["React.js", "Node.js", "Express.js", "MySQL"],
-    features: ["Property Listings", "Search & Filters", "Contact Forms"],
+    title: "Real Estate Platform",
+    description: "Complete online presence for real estate developer with property showcase and client management.",
+    stack: ["React.js", "Node.js", "Express.js", "MySQL", "Bootstrap"],
+    features: ["Property Listings", "Advanced Search", "Contact Management", "Admin Dashboard"],
     github: "https://github.com/Salisuili/",
-    demo: "#"
+    demo: "#",
+    status: "In Development"
   },
   {
-    title: "Lecture Timetable Reminder & Task Scheduling System",
-    description: "An application designed to help students and educators manage lecture schedules and personal tasks efficiently, with integrated reminders.",
-    stack: ["PHP", "MySQL", "Bootstrap"],
-    features: ["Timetable Management", "Task Scheduling", "Reminders", "User Dashboards"],
+    title: "Timetable & Task Management",
+    description: "Academic scheduling system with integrated reminders and task management for students and educators.",
+    stack: ["PHP", "MySQL", "Bootstrap", "JavaScript"],
+    features: ["Schedule Management", "Task Tracking", "Reminder System", "User Dashboard"],
     github: "https://github.com/Salisuili/onlinelecturenot",
-    demo: "#"
+    demo: "#",
+    status: "Completed"
   },
   {
-    title: "Evaluation of Students' Performance System",
-    description: "A system for tracking and evaluating student academic performance, providing comprehensive insights for educators and administrators.",
-    stack: ["PHP", "MySQL", "React.js"],
-    features: ["Performance Tracking", "Grading System", "Reporting", "Student Profiles"],
+    title: "Student Performance System",
+    description: "Comprehensive system for tracking and evaluating student academic performance with detailed analytics.",
+    stack: ["PHP", "MySQL", "React.js", "Chart.js"],
+    features: ["Performance Analytics", "Grade Management", "Progress Reports", "Data Visualization"],
     github: "https://github.com/Salisuili/",
-    demo: "#"
-  },
-  {
-    title: "API Development Projects",
-    description: "A collection of robust API projects demonstrating expertise in building scalable and secure backend services, covering various domains.",
-    stack: ["Node.js", "Express.js", "PHP", "MySQL", "MongoDB"],
-    features: ["RESTful APIs", "Authentication", "Data Validation", "Scalable Architecture"],
-    github: "https://github.com/Salisuili/",
-    demo: "#"
+    demo: "#",
+    status: "Completed"
   },
 ];
 
 const Projects = () => (
-  <section id="projects" className="py-5 bg-light">
-    <div className="container my-5">
-      <h2 className="display-5 fw-bold text-dark text-center mb-5">My Projects</h2>
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  <section id="projects" style={styles.sectionAlt}>
+    <div style={styles.container}>
+      <div style={styles.sectionHeader}>
+        <h2 style={styles.sectionTitle}>Featured Projects</h2>
+        <p style={styles.sectionSubtitle}>A showcase of my recent work and contributions</p>
+      </div>
+      <div style={styles.projectGrid}>
         {projectsData.map((project, index) => (
-          <div key={index} className="col">
-            <div className="card h-100 shadow-sm border-0 animate-hover">
-              <div className="card-body d-flex flex-column">
-                <h3 className="card-title h5 text-dark mb-3">{project.title}</h3>
-                <p className="card-text text-muted flex-grow-1" style={{ minHeight: '4.5rem', overflow: 'hidden', textOverflow: 'ellipsis' }}>{project.description}</p>
-                <div className="mb-3">
-                  <p className="fw-semibold text-secondary mb-1">Stack:</p>
-                  <div className="d-flex flex-wrap gap-2">
-                    {project.stack.map((tech, i) => (
-                      <span key={i} className="badge bg-info text-dark rounded-pill py-1 px-2">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <p className="fw-semibold text-secondary mb-1">Key Features:</p>
-                  <ul className="text-muted small ps-3 mb-0">
-                    {project.features.slice(0, 2).map((feature, i) => (
-                      <li key={i}>{feature}</li>
-                    ))}
-                    {project.features.length > 2 && <li>...</li>}
-                  </ul>
-                </div>
-                <div className="d-flex gap-2 mt-auto">
-                  {project.github && (
-                    <a 
-                      href={project.github} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="btn btn-dark btn-sm d-flex align-items-center gap-1 flex-grow-1 justify-content-center"
-                    >
-                      <Github size={16} />
-                      GitHub
-                    </a>
-                  )}
-                  {project.demo && project.demo !== "#" && (
-                    <a 
-                      href={project.demo} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="btn btn-primary btn-sm d-flex align-items-center gap-1 flex-grow-1 justify-content-center"
-                    >
-                      <ExternalLink size={16} />
-                      Live Demo
-                    </a>
-                  )}
-                </div>
+          <div key={index} style={styles.projectCard}>
+            <div style={styles.projectHeader}>
+              <h3 style={styles.projectTitle}>{project.title}</h3>
+              <span style={{
+                ...styles.statusBadge,
+                ...(project.status === 'Live' ? styles.statusLive : 
+                    project.status === 'In Development' ? styles.statusDev : 
+                    styles.statusCompleted)
+              }}>
+                {project.status}
+              </span>
+            </div>
+            <p style={styles.projectDescription}>{project.description}</p>
+            <div style={styles.techStack}>
+              <p style={styles.techLabel}>Technology Stack:</p>
+              <div style={styles.techTags}>
+                {project.stack.map((tech, i) => (
+                  <span key={i} style={styles.techTag}>{tech}</span>
+                ))}
               </div>
+            </div>
+            <div style={styles.features}>
+              <p style={styles.featuresLabel}>Key Features:</p>
+              <ul style={styles.featuresList}>
+                {project.features.map((feature, i) => (
+                  <li key={i} style={styles.featuresItem}>{feature}</li>
+                ))}
+              </ul>
+            </div>
+            <div style={styles.projectLinks}>
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noopener noreferrer" style={styles.linkBtn}>
+                  <Github size={16} /> Code
+                </a>
+              )}
+              {project.demo && project.demo !== "#" && (
+                <a href={project.demo} target="_blank" rel="noopener noreferrer" style={styles.linkBtnPrimary}>
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+              )}
             </div>
           </div>
         ))}
@@ -291,71 +309,87 @@ const Projects = () => (
 
 const skillsData = {
   frontend: [
-    { name: "React", icon: "https://placehold.co/40x40/c0d9ed/000000?text=React" },
-    { name: "Bootstrap", icon: "https://placehold.co/40x40/7952B3/ffffff?text=BS" },
-    { name: "HTML5", icon: "https://placehold.co/40x40/E34F26/ffffff?text=HTML" },
-    { name: "CSS3", icon: "https://placehold.co/40x40/1572B6/ffffff?text=CSS" },
-    { name: "JavaScript", icon: "https://placehold.co/40x40/F7DF1E/000000?text=JS" },
+    { name: "React.js", level: "Advanced" },
+    { name: "Next.js", level: "Intermediate" },
+    { name: "JavaScript", level: "Advanced" },
+    { name: "HTML5", level: "Advanced" },
+    { name: "CSS3", level: "Advanced" },
+    { name: "Bootstrap", level: "Advanced" },
+    { name: "Tailwind CSS", level: "Intermediate" },
   ],
   backend: [
-    { name: "Node.js", icon: "https://placehold.co/40x40/339933/ffffff?text=Node" },
-    { name: "Express.js", icon: "https://placehold.co/40x40/000000/ffffff?text=Exp" },
-    { name: "PHP", icon: "https://placehold.co/40x40/777BB4/ffffff?text=PHP" },
+    { name: "Node.js", level: "Advanced" },
+    { name: "Express.js", level: "Advanced" },
+    { name: "PHP", level: "Intermediate" },
+    { name: "MySQL", level: "Advanced" },
+    { name: "MongoDB", level: "Intermediate" },
+    { name: "Supabase", level: "Intermediate" },
   ],
-  databases: [
-    { name: "MySQL", icon: "https://placehold.co/40x40/4479A1/ffffff?text=SQL" },
-    { name: "MongoDB", icon: "https://placehold.co/40x40/47A248/ffffff?text=Mongo" },
-    { name: "Supabase", icon: "https://placehold.co/40x40/3ECF8E/ffffff?text=SB" },
+  cloud: [
+    { name: "AWS S3", level: "Intermediate" },
+    { name: "Vercel", level: "Intermediate" },
+    { name: "Socket.IO", level: "Intermediate" },
+    { name: "RESTful APIs", level: "Advanced" },
+    { name: "Git", level: "Advanced" },
   ],
-  cloudStorage: [
-    { name: "AWS S3", icon: "https://placehold.co/40x40/FF9900/ffffff?text=S3" },
-    { name: "Supabase Storage", icon: "https://placehold.co/40x40/3ECF8E/ffffff?text=SB" },
-  ],
-  realtimeCommunication: [
-    { name: "Socket.IO", icon: "https://placehold.co/40x40/010101/ffffff?text=IO" },
-  ],
-  securityPractices: [
-    { name: "OWASP Security Principles", icon: "https://placehold.co/40x40/000000/ffffff?text=OWASP" },
-  ],
-  programmingLanguages: [
-    { name: "JavaScript", icon: "https://placehold.co/40x40/F7DF1E/000000?text=JS" },
-    { name: "PHP", icon: "https://placehold.co/40x40/777BB4/ffffff?text=PHP" },
-    { name: "SQL", icon: "https://placehold.co/40x40/4479A1/ffffff?text=SQL" },
-    { name: "Python", icon: "https://placehold.co/40x40/3776AB/ffffff?text=Py" },
-    { name: "Visual Basic", icon: "https://placehold.co/40x40/851E85/ffffff?text=VB" },
+  security: [
+    { name: "OWASP Principles", level: "Intermediate" },
+    { name: "JWT Authentication", level: "Advanced" },
+    { name: "Data Encryption", level: "Intermediate" },
+    { name: "Security Testing", level: "Intermediate" },
   ],
 };
 
-const SkillCategory = ({ title, skills, icon: Icon }) => (
-  <div className="card shadow-sm border-0">
-    <div className="card-body p-4">
-      <h3 className="card-title h5 text-dark mb-4 d-flex align-items-center">
-        <Icon className="me-3 text-primary" size={24} /> {title}
-      </h3>
-      <div className="d-flex flex-wrap gap-3">
-        {skills.map((skill, index) => (
-          <div key={index} className="d-flex align-items-center bg-light p-2 rounded-pill shadow-sm">
-            {skill.icon && <img src={skill.icon} alt={skill.name} className="me-2 rounded-circle" style={{ width: '30px', height: '30px' }} onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/30x30/cccccc/333333?text=${skill.name.substring(0, 2)}` }} />}
-            <span className="text-dark small fw-medium">{skill.name}</span>
-          </div>
-        ))}
-      </div>
+const SkillCategory = ({ title, skills }) => (
+  <div style={styles.skillCard}>
+    <h3 style={styles.skillTitle}>
+      <Icon size={24} style={styles.skillIcon} /> {title}
+    </h3>
+    <div style={styles.skillList}>
+      {skills.map((skill, index) => (
+        <div key={index} style={styles.skillItem}>
+          <span style={styles.skillName}>{skill.name}</span>
+          <span style={{
+            ...styles.levelBadge,
+            ...(skill.level === 'Advanced' ? styles.levelAdvanced : styles.levelIntermediate)
+          }}>
+            {skill.level}
+          </span>
+        </div>
+      ))}
     </div>
   </div>
 );
 
 const Skills = () => (
-  <section id="skills" className="py-5 bg-white">
-    <div className="container my-5">
-      <h2 className="display-5 fw-bold text-dark text-center mb-5">My Skills</h2>
-      <div className="row row-cols-1 row-cols-md-2 g-4">
-        <div className="col"><SkillCategory title="Frontend" skills={skillsData.frontend} icon={Code} /></div>
-        <div className="col"><SkillCategory title="Backend" skills={skillsData.backend} icon={GitBranch} /></div>
-        <div className="col"><SkillCategory title="Databases" skills={skillsData.databases} icon={Database} /></div>
-        <div className="col"><SkillCategory title="Cloud & Storage" skills={skillsData.cloudStorage} icon={Cloud} /></div>
-        <div className="col"><SkillCategory title="Real-Time Communication" skills={skillsData.realtimeCommunication} icon={Zap} /></div>
-        <div className="col"><SkillCategory title="Security Practices" skills={skillsData.securityPractices} icon={Shield} /></div>
-        <div className="col"><SkillCategory title="Programming Languages" skills={skillsData.programmingLanguages} icon={Terminal} /></div>
+  <section id="skills" style={styles.section}>
+    <div style={styles.container}>
+      <div style={styles.sectionHeader}>
+        <h2 style={styles.sectionTitle}>Technical Skills</h2>
+        <p style={styles.sectionSubtitle}>Technologies and tools I work with</p>
+      </div>
+      <div style={styles.skillsGrid}>
+        <SkillCategory title="Frontend Development" skills={skillsData.frontend} icon={Code} />
+        <SkillCategory title="Backend & Databases" skills={skillsData.backend} icon={Database} />
+        <SkillCategory title="Cloud & Services" skills={skillsData.cloud} icon={Cloud} />
+      </div>
+      <div style={styles.securitySection}>
+        <div style={styles.card}>
+          <h3 style={styles.cardTitle}>
+            <Shield size={24} style={styles.cardIcon} /> Security Expertise
+          </h3>
+          <div style={styles.securityGrid}>
+            {skillsData.security.map((skill, index) => (
+              <div key={index} style={styles.securityItem}>
+                <div style={styles.securityIconWrapper}>
+                  <Shield size={20} color="#3b82f6" />
+                </div>
+                <h4 style={styles.securityName}>{skill.name}</h4>
+                <span style={styles.securityLevel}>{skill.level}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -384,113 +418,101 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-5 bg-light">
-      <div className="container my-5">
-        <h2 className="display-5 fw-bold text-dark text-center mb-5">Get in Touch</h2>
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="card shadow-lg border-0">
-              <div className="card-body p-5">
-                <form onSubmit={handleSubmit}>
-                  <div className="row">
-                    <div className="col-md-6 mb-3">
-                      <label htmlFor="name" className="form-label">Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <div className="col-md-6 mb-3">
-                      <label htmlFor="email" className="form-label">Email</label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="subject" className="form-label">Subject</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="message" className="form-label">Message</label>
-                    <textarea
-                      className="form-control"
-                      id="message"
-                      name="message"
-                      rows="5"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                    ></textarea>
-                  </div>
-                  <button type="submit" className="btn btn-primary btn-lg w-100">
-                    Send Message <Mail className="ms-2" size={20} />
-                  </button>
-                </form>
+    <section id="contact" style={styles.contactSection}>
+      <div style={styles.container}>
+        <div style={styles.sectionHeader}>
+          <h2 style={styles.sectionTitleWhite}>Let's Connect</h2>
+          <p style={styles.sectionSubtitleWhite}>Have a project in mind? I'd love to hear about it</p>
+        </div>
+        
+        <div style={styles.contactFormWrapper}>
+          <div style={styles.contactCard}>
+            <form onSubmit={handleSubmit}>
+              <div style={styles.formRow}>
+                <div style={styles.formGroup}>
+                  <label style={styles.label}>Name *</label>
+                  <input
+                    type="text"
+                    style={styles.input}
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Your name"
+                  />
+                </div>
+                <div style={styles.formGroup}>
+                  <label style={styles.label}>Email *</label>
+                  <input
+                    type="email"
+                    style={styles.input}
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="Your email address"
+                  />
+                </div>
               </div>
-            </div>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>Subject</label>
+                <input
+                  type="text"
+                  style={styles.input}
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Project or inquiry subject"
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>Message *</label>
+                <textarea
+                  style={{...styles.input, ...styles.textarea}}
+                  name="message"
+                  rows="5"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  placeholder="Tell me about your project or inquiry..."
+                ></textarea>
+              </div>
+              <button type="submit" style={styles.submitBtn}>
+                Send Message <Mail size={20} style={styles.buttonIcon} />
+              </button>
+            </form>
           </div>
         </div>
         
-        <div className="text-center mt-5">
-          <p className="lead text-muted mb-4">Or reach out directly through these channels:</p>
-          <div className="d-flex flex-column flex-md-row justify-content-center gap-4 mb-5">
-            <a
-              href="mailto:salisuiliyasu101@gmail.com"
-              className="btn btn-danger btn-lg rounded-pill shadow-sm d-flex align-items-center justify-content-center animate-hover"
-            >
-              <EmailIcon className="me-3" size={20} /> salisuiliyasu101@gmail.com
+        <div style={styles.contactInfo}>
+          <p style={styles.contactLabel}>Prefer direct contact?</p>
+          <div style={styles.contactButtons}>
+            <a href="mailto:salisuiliyasu101@gmail.com" style={styles.contactBtn}>
+              <EmailIcon size={20} /> salisuiliyasu101@gmail.com
             </a>
-            <a
-              href="tel:+2349037470906"
-              className="btn btn-success btn-lg rounded-pill shadow-sm d-flex align-items-center justify-content-center animate-hover"
-            >
-              <Smartphone className="me-3" size={20} /> +234 903 747 0906
+            <a href="tel:+2349037470906" style={styles.contactBtn}>
+              <Smartphone size={20} /> +234 903 747 0906
             </a>
           </div>
-          <div className="d-flex justify-content-center gap-3">
-            <a
-              href="https://github.com/Salisuili"
-              className="btn btn-dark btn-lg rounded-circle shadow-sm d-flex align-items-center justify-content-center animate-hover"
-              aria-label="GitHub"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ width: '56px', height: '56px' }}
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="https://linkedin.com/in/salisu-iliyasu-75599522b"
-              className="btn btn-primary btn-lg rounded-circle shadow-sm d-flex align-items-center justify-content-center animate-hover"
-              aria-label="LinkedIn"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ width: '56px', height: '56px' }}
-            >
-              <LinkedInIcon size={24} />
-            </a>
+          
+          <div style={styles.socialSection}>
+            <p style={styles.socialLabel}>Connect with me on social platforms:</p>
+            <div style={styles.socialLinks}>
+              <a href="https://github.com/Salisuili" target="_blank" rel="noopener noreferrer" style={styles.socialBtn}>
+                <Github size={24} />
+              </a>
+              <a href="https://linkedin.com/in/salisu-iliyasu-75599522b" target="_blank" rel="noopener noreferrer" style={styles.socialBtnLinkedIn}>
+                <Linkedin size={24} />
+              </a>
+            </div>
           </div>
-          <p className="text-muted mt-5">
-            No. 10 Nagurmi Street, Hayin Dogo Samaru-Zaria, Kaduna, Nigeria
-          </p>
+          
+          <div style={styles.location}>
+            <p style={styles.locationText}>
+              No. 10 Nagurmi Street, Hayin Dogo Samaru-Zaria, Kaduna, Nigeria
+            </p>
+            <p style={styles.locationText}>Available for freelance projects and full-time opportunities</p>
+          </div>
         </div>
       </div>
     </section>
@@ -498,16 +520,23 @@ const Contact = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-dark text-white text-center p-3 mt-auto">
-    <p className="mb-0">&copy; {new Date().getFullYear()} Salisu Iliyasu. All rights reserved.</p>
+  <footer style={styles.footer}>
+    <div style={styles.container}>
+      <div style={styles.footerContent}>
+        <p style={styles.footerText}>© {new Date().getFullYear()} Salisu Iliyasu. All rights reserved.</p>
+        <p style={styles.footerText}>
+          Built with <span style={styles.footerHighlight}>React</span> • Hosted on <span style={styles.footerHighlight}>Vercel</span>
+        </p>
+      </div>
+    </div>
   </footer>
 );
 
 function App() {
   return (
-    <div className="bg-light text-dark min-vh-100">
+    <div style={styles.app}>
       <Navbar />
-      <main style={{ paddingTop: '70px' }}>
+      <main style={styles.main}>
         <Hero />
         <About />
         <Projects />
@@ -518,5 +547,694 @@ function App() {
     </div>
   );
 }
+
+const styles = {
+  app: {
+    backgroundColor: '#f5f5f5',
+    minHeight: '100vh',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  },
+  main: {
+    paddingTop: '70px',
+  },
+  navbar: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#1a202c',
+    padding: '1rem 0',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    zIndex: 1000,
+  },
+  container: {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '0 2rem',
+  },
+  brand: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    color: '#fff',
+    textDecoration: 'none',
+    display: 'inline-block',
+    marginBottom: '0',
+  },
+  navLinks: {
+    display: 'flex',
+    gap: '2rem',
+    justifyContent: 'flex-end',
+    marginTop: '1rem',
+    flexWrap: 'wrap',
+  },
+  navLink: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    color: '#fff',
+    textDecoration: 'none',
+    fontWeight: '500',
+    transition: 'color 0.3s',
+    cursor: 'pointer',
+  },
+  icon: {
+    marginRight: '0.25rem',
+  },
+  hero: {
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    background: 'linear-gradient(135deg, #2d3748 0%, #4a5568 100%)',
+    padding: '4rem 0',
+  },
+  heroContent: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '4rem',
+    alignItems: 'center',
+  },
+  heroText: {
+    color: '#fff',
+  },
+  heroTitle: {
+    fontSize: '3rem',
+    fontWeight: 'bold',
+    marginBottom: '1rem',
+    color: '#fff',
+  },
+  highlight: {
+    color: '#fbbf24',
+  },
+  heroSubtitle: {
+    fontSize: '1.5rem',
+    marginBottom: '1rem',
+    color: '#e5e7eb',
+  },
+  heroDescription: {
+    fontSize: '1.125rem',
+    marginBottom: '2rem',
+    lineHeight: '1.7',
+    opacity: 0.9,
+  },
+  heroButtons: {
+    display: 'flex',
+    gap: '1rem',
+    flexWrap: 'wrap',
+  },
+  btnPrimary: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.875rem 2rem',
+    backgroundColor: '#fbbf24',
+    color: '#000',
+    border: 'none',
+    borderRadius: '9999px',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+  },
+  btnSecondary: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.875rem 2rem',
+    backgroundColor: 'transparent',
+    color: '#fff',
+    border: '2px solid #fff',
+    borderRadius: '9999px',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+  },
+  btnDownload: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.875rem 2rem',
+    backgroundColor: '#fff',
+    color: '#000',
+    border: 'none',
+    borderRadius: '9999px',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    textDecoration: 'none',
+  },
+  buttonIcon: {
+    marginLeft: '0.5rem',
+  },
+  heroImageContainer: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  heroImage: {
+    width: '400px',
+    height: '400px',
+    borderRadius: '50%',
+    objectFit: 'cover',
+    border: '5px solid #fff',
+    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+    transform: 'scale(0.95)',
+  },
+  imageBorder: {
+    position: 'absolute',
+    top: 0,
+    left: '50%',
+    transform: 'translateX(-50%) scale(1.05)',
+    width: '400px',
+    height: '400px',
+    borderRadius: '50%',
+    border: '3px solid #fbbf24',
+  },
+  section: {
+    padding: '5rem 0',
+    backgroundColor: '#fff',
+  },
+  sectionAlt: {
+    padding: '5rem 0',
+    backgroundColor: '#f9fafb',
+  },
+  sectionHeader: {
+    textAlign: 'center',
+    marginBottom: '3rem',
+  },
+  sectionTitle: {
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    marginBottom: '1rem',
+    color: '#1a202c',
+  },
+  sectionTitleWhite: {
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    marginBottom: '1rem',
+    color: '#fff',
+  },
+  sectionSubtitle: {
+    fontSize: '1.25rem',
+    color: '#6b7280',
+  },
+  sectionSubtitleWhite: {
+    fontSize: '1.25rem',
+    color: '#e5e7eb',
+  },
+  aboutContainer: {
+    maxWidth: '1000px',
+    margin: '0 auto',
+  },
+  aboutHeader: {
+    textAlign: 'center',
+    marginBottom: '3rem',
+  },
+  profileImageWrapper: {
+    position: 'relative',
+    display: 'inline-block',
+    marginBottom: '2rem',
+  },
+  profileImage: {
+    width: '220px',
+    height: '220px',
+    borderRadius: '50%',
+    objectFit: 'cover',
+    boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+  },
+  profileBadge: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    backgroundColor: '#fbbf24',
+    borderRadius: '50%',
+    padding: '0.5rem',
+    border: '3px solid #fff',
+  },
+  badges: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '0.5rem',
+    justifyContent: 'center',
+    marginTop: '1.5rem',
+  },
+  badge: {
+    padding: '0.5rem 1rem',
+    borderRadius: '9999px',
+    fontSize: '0.875rem',
+    fontWeight: '500',
+  },
+  badgeBlue: { backgroundColor: '#dbeafe', color: '#1e40af' },
+  badgeGreen: { backgroundColor: '#d1fae5', color: '#065f46' },
+  badgeCyan: { backgroundColor: '#cffafe', color: '#155e75' },
+  badgeYellow: { backgroundColor: '#fef3c7', color: '#92400e' },
+  badgeRed: { backgroundColor: '#fee2e2', color: '#991b1b' },
+  badgeGray: { backgroundColor: '#f3f4f6', color: '#1f2937' },
+  badgePurple: { backgroundColor: '#ede9fe', color: '#5b21b6' },
+  aboutCards: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '2rem',
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: '0.75rem',
+    padding: '2rem',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    transition: 'transform 0.3s, box-shadow 0.3s',
+  },
+  cardTitle: {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '1.5rem',
+    marginBottom: '1.5rem',
+    color: '#1a202c',
+  },
+  cardIcon: {
+    marginRight: '0.75rem',
+    color: '#3b82f6',
+  },
+  cardText: {
+    color: '#6b7280',
+    marginBottom: '1rem',
+    lineHeight: '1.7',
+  },
+  feature: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '1.5rem',
+  },
+  featureIcon: {
+    backgroundColor: '#dbeafe',
+    padding: '0.75rem',
+    borderRadius: '50%',
+    marginRight: '1rem',
+  },
+  featureTitle: {
+    fontSize: '1rem',
+    fontWeight: '600',
+    marginBottom: '0.25rem',
+    color: '#1a202c',
+  },
+  featureText: {
+    fontSize: '0.875rem',
+    color: '#6b7280',
+    margin: 0,
+  },
+  principles: {
+    marginBottom: '1.5rem',
+  },
+  principlesTitle: {
+    fontSize: '1rem',
+    fontWeight: '600',
+    marginBottom: '0.75rem',
+    color: '#1a202c',
+  },
+  list: {
+    color: '#6b7280',
+    paddingLeft: '1.5rem',
+    margin: 0,
+  },
+  listItem: {
+    marginBottom: '0.5rem',
+  },
+  quote: {
+    backgroundColor: '#f9fafb',
+    padding: '1rem',
+    borderRadius: '0.5rem',
+    marginTop: '1rem',
+  },
+  quoteText: {
+    color: '#6b7280',
+    fontSize: '0.875rem',
+    fontStyle: 'italic',
+    margin: 0,
+  },
+  projectGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+    gap: '2rem',
+  },
+  projectCard: {
+    backgroundColor: '#fff',
+    borderRadius: '0.75rem',
+    padding: '2rem',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    transition: 'transform 0.3s, box-shadow 0.3s',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  projectHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: '1rem',
+  },
+  projectTitle: {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    color: '#1a202c',
+    margin: 0,
+  },
+  statusBadge: {
+    padding: '0.25rem 0.75rem',
+    borderRadius: '9999px',
+    fontSize: '0.75rem',
+    fontWeight: '600',
+  },
+  statusLive: { backgroundColor: '#10b981', color: '#fff' },
+  statusDev: { backgroundColor: '#fbbf24', color: '#000' },
+  statusCompleted: { backgroundColor: '#6b7280', color: '#fff' },
+  projectDescription: {
+    color: '#6b7280',
+    marginBottom: '1.5rem',
+    lineHeight: '1.6',
+    flexGrow: 1,
+  },
+  techStack: {
+    marginBottom: '1.5rem',
+  },
+  techLabel: {
+    fontSize: '0.875rem',
+    fontWeight: '600',
+    color: '#6b7280',
+    marginBottom: '0.5rem',
+  },
+  techTags: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '0.5rem',
+  },
+  techTag: {
+    padding: '0.25rem 0.75rem',
+    backgroundColor: '#dbeafe',
+    color: '#1e40af',
+    borderRadius: '9999px',
+    fontSize: '0.75rem',
+  },
+  features: {
+    marginBottom: '1.5rem',
+  },
+  featuresLabel: {
+    fontSize: '0.875rem',
+    fontWeight: '600',
+    color: '#6b7280',
+    marginBottom: '0.5rem',
+  },
+  featuresList: {
+    paddingLeft: '1.25rem',
+    margin: 0,
+  },
+  featuresItem: {
+    color: '#6b7280',
+    fontSize: '0.875rem',
+    marginBottom: '0.25rem',
+  },
+  projectLinks: {
+    display: 'flex',
+    gap: '0.75rem',
+    marginTop: 'auto',
+  },
+  linkBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.5rem 1rem',
+    backgroundColor: '#1a202c',
+    color: '#fff',
+    borderRadius: '0.375rem',
+    textDecoration: 'none',
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    flex: 1,
+    justifyContent: 'center',
+    transition: 'background-color 0.3s',
+  },
+  linkBtnPrimary: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.5rem 1rem',
+    backgroundColor: '#fbbf24',
+    color: '#000',
+    borderRadius: '0.375rem',
+    textDecoration: 'none',
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    flex: 1,
+    justifyContent: 'center',
+    transition: 'background-color 0.3s',
+  },
+  skillsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+    gap: '2rem',
+  },
+  skillCard: {
+    backgroundColor: '#fff',
+    borderRadius: '0.75rem',
+    padding: '2rem',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  },
+  skillTitle: {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    marginBottom: '1.5rem',
+    color: '#1a202c',
+  },
+  skillIcon: {
+    marginRight: '0.75rem',
+    color: '#3b82f6',
+  },
+  skillList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem',
+  },
+  skillItem: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '0.75rem',
+    backgroundColor: '#f9fafb',
+    borderRadius: '0.5rem',
+  },
+  skillName: {
+    color: '#1a202c',
+    fontWeight: '500',
+  },
+  levelBadge: {
+    padding: '0.25rem 0.75rem',
+    borderRadius: '0.375rem',
+    fontSize: '0.75rem',
+    fontWeight: '600',
+  },
+  levelAdvanced: {
+    backgroundColor: '#10b981',
+    color: '#fff',
+  },
+  levelIntermediate: {
+    backgroundColor: '#fbbf24',
+    color: '#000',
+  },
+  securitySection: {
+    marginTop: '2rem',
+  },
+  securityGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: '1.5rem',
+  },
+  securityItem: {
+    backgroundColor: '#f9fafb',
+    padding: '1.5rem',
+    borderRadius: '0.5rem',
+    textAlign: 'center',
+  },
+  securityIconWrapper: {
+    backgroundColor: '#dbeafe',
+    display: 'inline-flex',
+    padding: '0.5rem',
+    borderRadius: '50%',
+    marginBottom: '0.75rem',
+  },
+  securityName: {
+    fontSize: '1rem',
+    fontWeight: '600',
+    marginBottom: '0.5rem',
+    color: '#1a202c',
+  },
+  securityLevel: {
+    display: 'inline-block',
+    padding: '0.25rem 0.75rem',
+    backgroundColor: '#3b82f6',
+    color: '#fff',
+    borderRadius: '0.375rem',
+    fontSize: '0.75rem',
+    fontWeight: '600',
+  },
+  contactSection: {
+    padding: '5rem 0',
+    backgroundColor: '#1a202c',
+    color: '#fff',
+  },
+  contactFormWrapper: {
+    maxWidth: '800px',
+    margin: '0 auto 3rem',
+  },
+  contactCard: {
+    backgroundColor: '#2d3748',
+    borderRadius: '0.75rem',
+    padding: '3rem',
+    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+  },
+  formRow: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '1.5rem',
+    marginBottom: '1.5rem',
+  },
+  formGroup: {
+    marginBottom: '1.5rem',
+  },
+  label: {
+    display: 'block',
+    marginBottom: '0.5rem',
+    color: '#e5e7eb',
+    fontSize: '0.875rem',
+    fontWeight: '500',
+  },
+  input: {
+    width: '100%',
+    padding: '0.75rem',
+    backgroundColor: '#1a202c',
+    border: '1px solid #4a5568',
+    borderRadius: '0.375rem',
+    color: '#fff',
+    fontSize: '1rem',
+    outline: 'none',
+    transition: 'border-color 0.3s',
+  },
+  textarea: {
+    resize: 'vertical',
+    minHeight: '120px',
+  },
+  submitBtn: {
+    width: '100%',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.5rem',
+    padding: '1rem',
+    backgroundColor: '#fbbf24',
+    color: '#000',
+    border: 'none',
+    borderRadius: '0.375rem',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  },
+  contactInfo: {
+    textAlign: 'center',
+    marginTop: '3rem',
+  },
+  contactLabel: {
+    fontSize: '1.25rem',
+    color: '#e5e7eb',
+    marginBottom: '1.5rem',
+  },
+  contactButtons: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '1.5rem',
+    marginBottom: '3rem',
+  },
+  contactBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.75rem',
+    padding: '0.875rem 1.5rem',
+    backgroundColor: 'transparent',
+    color: '#fff',
+    border: '2px solid #fff',
+    borderRadius: '9999px',
+    textDecoration: 'none',
+    fontSize: '1rem',
+    transition: 'all 0.3s',
+  },
+  socialSection: {
+    marginBottom: '3rem',
+  },
+  socialLabel: {
+    color: '#e5e7eb',
+    marginBottom: '1.5rem',
+  },
+  socialLinks: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '1rem',
+  },
+  socialBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '56px',
+    height: '56px',
+    backgroundColor: '#fff',
+    color: '#1a202c',
+    borderRadius: '50%',
+    textDecoration: 'none',
+    transition: 'transform 0.3s',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  },
+  socialBtnLinkedIn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '56px',
+    height: '56px',
+    backgroundColor: '#0a66c2',
+    color: '#fff',
+    borderRadius: '50%',
+    textDecoration: 'none',
+    transition: 'transform 0.3s',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  },
+  location: {
+    borderTop: '1px solid #4a5568',
+    paddingTop: '2rem',
+  },
+  locationText: {
+    color: '#9ca3af',
+    margin: '0.5rem 0',
+  },
+  footer: {
+    backgroundColor: '#0f172a',
+    padding: '2rem 0',
+    color: '#fff',
+  },
+  footerContent: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '1rem',
+  },
+  footerText: {
+    color: '#9ca3af',
+    margin: 0,
+  },
+  footerHighlight: {
+    color: '#fbbf24',
+  },
+};
 
 export default App;
